@@ -1,0 +1,12 @@
+# DataX → 放到 .github/dependabot.yml
+# Maven 单体仓库：directory "/" 扫描全部子目录 pom.xml
+version: 2
+updates:
+  - package-ecosystem: "maven"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      all-dependencies:
+        patterns: ["*"]
+    open-pull-requests-limit: 20
