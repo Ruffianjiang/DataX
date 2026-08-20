@@ -14,7 +14,7 @@
     <description>HdfsWriter提供了写入HDFS功能。</description>
     <packaging>jar</packaging>
     <properties>
-        <hive.version>1.1.1</hive.version>
+        <hive.version>4.0.1</hive.version>
         <hadoop.version>3.4.0</hadoop.version>
     </properties>
 
