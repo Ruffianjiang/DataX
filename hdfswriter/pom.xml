@@ -103,6 +103,11 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache.orc</groupId>
+            <artifactId>orc-core</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.alibaba.datax</groupId>
             <artifactId>plugin-unstructured-storage-util</artifactId>
             <version>${datax-project-version}</version>
