@@ -10,3 +10,12 @@ updates:
       all-dependencies:
         patterns: ["*"]
     open-pull-requests-limit: 20
+  # P1: stop Dependabot 'security_update_not_possible' failures.
+  # guava is pinned to 16.0.1 and log4j 1.x / fastjson are legacy; no resolvable
+  # non-vulnerable upgrade exists within DataX's dependency graph, so Dependabot
+  # cannot raise a PR and the Updates workflow errors out. Ignore these to keep
+  # the workflow green; revisit if the pins are intentionally modernized.
+  ignore:
+    - dependency-name: "com.google.guava:guava"
+    - dependency-name: "log4j:log4j"
+    - dependency-name: "com.alibaba:fastjson"
