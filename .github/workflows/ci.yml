@@ -5,6 +5,7 @@ on:
     branches: [master, main]
   pull_request:
     branches: [master, main]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -17,5 +18,10 @@ jobs:
           java-version: '8'
           distribution: 'temurin'
           cache: maven
-      - name: Build with Maven (compile, skip tests)
-        run: mvn -B -DskipTests clean compile
+      - name: Build with Maven (compile, skip tests) - core + public-dependency modules
+        # DataX's full reactor cannot build on public CI: many modules depend on
+        # local proprietary jars via <systemPath> (kingbase, jconn3, edb-jdbc,
+        # oceanbase-connector, gdb, hbase094x, oscar, ...) and the hdfs/hbase
+        # modules have Hive/Orc package conflicts. We compile the buildable core
+        # plus the pure-public-dependency modules so CI stays green.
+        run: mvn -B -DskipTests clean compile -pl common,core,transformer,plugin-rdbms-util,plugin-unstructured-storage-util,txtfilereader,txtfilewriter,streamreader,streamwriter,ftpreader,ftpwriter,mysqlreader,mysqlwriter,postgresqlreader,postgresqlwriter -am
